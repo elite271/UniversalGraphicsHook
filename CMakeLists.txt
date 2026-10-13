@@ -47,15 +47,11 @@ target_include_directories(imgui PUBLIC
 )
 
 if(WIN32)
-    # d3dx9 removed: it's not part of modern Windows SDKs and isn't
-    # needed by imgui_impl_dx9 anyway.
     target_link_libraries(imgui PUBLIC d3d9 dwmapi uxtheme)
 endif()
 
 
-
-# add_executable(UniversalHook)
-add_library(UniversalHook SHARED) # shared for DLL
+add_library(UniversalHook SHARED)
 
 target_sources(UniversalHook PRIVATE
     src/main.cpp
@@ -84,8 +80,6 @@ if(UG_ENABLE_VULKAN)
 endif()
 
 
-#    UNICODE
-#    _UNICODE
 target_compile_definitions(UniversalHook PRIVATE
     $<$<BOOL:${UG_ENABLE_D3D9}>:UG_ENABLE_D3D9>
     $<$<BOOL:${UG_ENABLE_D3D10}>:UG_ENABLE_D3D10>
